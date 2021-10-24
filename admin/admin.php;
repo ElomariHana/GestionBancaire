@@ -1,0 +1,142 @@
+<?php
+
+/*
+include la connexion a la base de données
+ */
+
+require_once $_SERVER["DOCUMENT_ROOT"].'/classes/utilisateur.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/classes/compte.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/classes/client.php';
+require_once $_SERVER["DOCUMENT_ROOT"].'/classes/typeCompte.php';
+
+$utilisateur = new Utilisateur();
+$compte      = new Compte();
+$client      = new Client();
+$type        = new TypeCompte();
+
+$typesComptes = $type->findAll();
+
+$data = $utilisateur->findAll();
+
+$comptes = $compte->findAll();
+
+$clients = $client->findAll();
+
+// highlight_string("<?php \n".var_export($data, true));
+exit();
+
+include $_SERVER["DOCUMENT_ROOT"].'/admin/inc/header.php';
+
+?>
+<!-- Main row -->
+      <div class="row">
+
+        <div class="col-sm-12">
+
+           <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">List des Employées</h3>
+            </div>
+            <!-- /.box-header -->
+             <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>N° Employé</th>
+                  <th>Nom complet</th>
+                  <th>Role</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+<?php if ($data) {
+
+	foreach ($data['emp'] as $key => $employe) {
+
+		?>
+
+		                 <tr>
+
+
+
+		                 <td> <?php echo $employe['id']?> </td>
+		                 <td> <?php echo $employe['nom']." ".$employe['prenom']?> </td>
+		                 <td> <?php echo $employe['role']?></td>
+		                 <td>  </td>
+
+		                </tr>
+		<?php }}?>
+</tbody>
+
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+       <div class="row">
+
+        <div class="col-sm-12">
+
+           <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">List des Employées</h3>
+            </div>
+            <!-- /.box-header -->
+             <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>N° Employé</th>
+                  <th>Nom complet</th>
+                  <th>Date de naissance</th>
+                  <th>Nature</th>
+                  <th>Actions</th>
+                </tr>
+                </thead>
+
+                <tbody>
+<?php if ($data) {
+
+	foreach ($data['clt'] as $key => $client) {
+
+		?>
+
+		                 <tr>
+
+
+
+		                 <td> <?php echo $client['numClient']?> </td>
+		                 <td> <?php echo $client['nom']." ".$client['prenom']?> </td>
+		                 <td> <?php echo $client['dateNais']?> </td>
+		                 <td> <?php echo $client['nature']?></td>
+
+		                 <td>  </td>
+
+		                </tr>
+		<?php }}?>
+</tbody>
+
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+</section>
+
+
+
+  <div class="control-sidebar-bg"></div>
+</div>
+
+<?php
+
+include $_SERVER["DOCUMENT_ROOT"].'/inc/footer.php';
+
+?>
+</body>
+</html>
